@@ -1,0 +1,43 @@
+{
+  "name": "No AI Edits",
+  "description": "Converts your images into GIFs to disable the \"Edit Image\" button from Grok.",
+  "version": "1.1",
+  "manifest_version": 3,
+  "host_permissions": [
+    "*://twitter.com/*",
+    "*://x.com/*",
+    "*://noaiedits.quadvision.eu/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "data_collection_permissions": {
+        "required": ["personallyIdentifyingInfo"]
+      },
+      "id": "5cff77d842091cd4bab692a68b8e88d039760292@quadvision.eu"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [ "images/editicon.png" ],
+      "matches": [ "*://*.x.com/*", "*://*.twitter.com/*" ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://x.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "32": "images/exticonsmaller.png",
+    "64": "images/exticonsmall.png",
+    "128": "images/exticon.png"
+  }
+}
